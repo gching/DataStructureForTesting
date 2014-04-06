@@ -20,7 +20,7 @@ static const std::size_t REP = 10;
 /************************ Struct Defintiion ******************************/
 struct triv {
   std::size_t x;
-  bool operator<(const Trivial &other) const { return a < other.a; }
+  bool operator<(const triv &other) const { return x < other.x; }
 };
 
 /************************************************************************/
@@ -52,7 +52,7 @@ microseconds insert_stack(int numberOfInput);
 // Instantiates tests for inserts of the data strucutres.
 // List will have data pushed from the back.
 // Stack will have data inserted by push.
-// Deqye will have data be inserted by push.
+// Deqye will have data be inserted by pushing from the back.
 void benching_structures(int numberOfInput){
 
   // Initialize the variables to hold the total time of inserts for data structures.
@@ -84,19 +84,21 @@ void benching_structures(int numberOfInput){
 }
 
 // insert_deque
-// int numberOfInput - The number of data that will be inserted into the queue.
-// Insert function for queue. Data will be inserted via push onto the queue.
+// int numberOfInput - The number of data that will be inserted into the deque.
+// Insert function for deque. Data will be inserted via push to the back.
 // Returns the time elapsed in microseconds
 microseconds insert_deque(int numberOfInput){
 
-  // Initialize the queue.
-  std::deque<std::size_t> trivial_deque;
+  // Initialize the deque.
+  std::deque<triv> trivial_deque;
 
-  // Push j into queue up to the given number of input and time it.
-  // Data being pushed will be of size_t.
+  // Push j into back of deque up to the given number of input and time it.
+  // Data being pushed will be of the strucutre triv with size_t as an attribute..
   auto start = std::chrono::system_clock::now();
-  for (std::size_t j = 0; j < numberOfInput; j++){	
-    trivial_deque.push(j);
+  for (std::size_t j = 0; j < numberOfInput; j++){
+  	triv triv_data;
+  	triv_data.x = j;	
+    trivial_deque.push_back(triv_data);
   }
   auto end = std::chrono::system_clock::now();
   microseconds elapsed = std::chrono::duration_cast<microseconds>(end - start);
@@ -110,13 +112,15 @@ microseconds insert_deque(int numberOfInput){
 microseconds insert_list(int numberOfInput){
 
   // Initialize the list
-  std::list<std::size_t> trivial_list;
+  std::list<triv> trivial_list;
 
   // Push j into list up to the given number of input and time it.
-  // Data being pushed to the back of the list will be of size_t.
+  // Data being pushed to the back of the list will be of triv with size_t as an attribute.
   auto start = std::chrono::system_clock::now();
-  for (std::size_t j = 0; j < numberOfInput; j++){	
-    trivial_list.push_back(j);
+  for (std::size_t j = 0; j < numberOfInput; j++){
+  	triv triv_data;
+  	triv_data.x = j;	
+    trivial_list.push_back(triv_data);
   }
   auto end = std::chrono::system_clock::now();
   microseconds elapsed = std::chrono::duration_cast<microseconds>(end - start);
@@ -129,14 +133,17 @@ microseconds insert_list(int numberOfInput){
 // Insert function for stack. Data will be pushed onto it.
 // Returns the time elapsed in microseconds.
 microseconds insert_stack(int numberOfInput){
-  // Initialize the list
-  std::stack<std::size_t> trivial_stack;
+  
+  // Initialize the stack.
+  std::stack<triv> trivial_stack;
 
   // Push j onto stack to the given number of input and time it.
-  // Data being pushed onto stack will be of size_t.
+  // Data being pushed onto stack will be of triv with size_t as an attribute.
   auto start = std::chrono::system_clock::now();
-  for (std::size_t j = 0; j < numberOfInput; j++){	
-    trivial_stack.push(j);
+  for (std::size_t j = 0; j < numberOfInput; j++){
+    triv triv_data;
+    triv_data.x = j;  	
+    trivial_stack.push(triv_data);
   }
   auto end = std::chrono::system_clock::now();
   microseconds elapsed = std::chrono::duration_cast<microseconds>(end - start);
@@ -144,8 +151,5 @@ microseconds insert_stack(int numberOfInput){
 
 
 }
-
-microseconds sort_queue
-
 
 /************************************************************************/
