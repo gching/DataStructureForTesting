@@ -71,11 +71,13 @@ void benching_structures(int numberOfInput){
   microseconds results_insert_stack (0);
   microseconds results_sort_deque (0);
   microseconds results_sort_list (0);
-
+  microseconds results_distruct_deque (0);
+  microseconds results_distruct_list (0);
+  microseconds results_distruct_stack (0);
 
   // Iterate through the number of repetitions and call the insert functions at each.
   for (std::size_t i = 0; i < REP; i++){
-  	// Calculate the time it takes for each data strucutre inserts.
+  	// Calculate the time it takes for each data structure inserts.
   	// Add up time for each data strucutre specifically.
   	
   	// Deque inserts.
@@ -92,6 +94,16 @@ void benching_structures(int numberOfInput){
 
     // List sort.
     results_sort_list += sort_list(numberOfInput);
+
+    // Deque destruct.
+    results_distruct_deque += destruction_deque(numberOfInput);
+
+    // List destruct.
+    results_distruct_list += destruction_list(numberOfInput);
+    
+    // Stack destruct.
+    results_distruct_stack += destruction_stack(numberOfInput);
+
   }
   // Output the average of the inserts depending on the number of repetitions set.
   std::cout << "Deque insert from front: " << results_insert_deque.count()/REP << std::endl;
@@ -103,6 +115,12 @@ void benching_structures(int numberOfInput){
   std::cout << "Deque sort: " << results_sort_deque.count()/REP << std::endl;
   
   std::cout << "List sort: " << results_sort_list.count()/REP << std::endl;
+
+  std::cout << "Deque destruction: " << results_distruct_deque.count()/REP << std::endl;
+
+  std::cout << "List destruction: " << results_distruct_list.count()/REP << std::endl;
+
+  std::cout << "Stack destruction: " << results_distruct_stack.count()/REP << std::endl;
 }
 
 /************************************************************************/
@@ -319,8 +337,8 @@ microseconds destruction_stack(int numberOfInput){
 /************************************************************************/
 
 /******************************** Top k elements********************************/
-microseconds top_deque(int numberOfInput);
-microseconds top_list(int numberOfInput);
-microseconds top_stack(int numberOfInput);
+// microseconds top_deque(int numberOfInput);
+// microseconds top_list(int numberOfInput);
+// microseconds top_stack(int numberOfInput);
 
 /************************************************************************/
